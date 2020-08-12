@@ -4,7 +4,7 @@ library(data.table)
 #Paste function
 "%&%" = function(a,b) paste(a,b,sep="")
 
-pop_list <- c("YRI", "CEU", "ASN", "ALL")
+pop_list <- c("YRI", "CEU", "ALL")
 drug_list <- c("arac", "capecitabine", "carboplatin", "cisplatin", "daunorubicin", "etoposide", "paclitaxel", "pemetrexed")
 
 for (pop in pop_list) {
