@@ -1,6 +1,6 @@
 #Import necessary libraries
 library(data.table)
-library(dpylr)
+library(dplyr)
 
 #import master pheno file and subset by pop
 master_phenos <- read.table("/home/ashley/LCL_chemotherapy/master_cytotoxicity_info_130311_plus_igrowth.txt", header = T)
