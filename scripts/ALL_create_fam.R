@@ -1,6 +1,6 @@
 #Import necessary libraries
 library(data.table)
-library(dpylr)
+library(dplyr)
 library(tibble)
 
 #Read in fam file for each pop and set column names, then add pop column
