@@ -1,6 +1,6 @@
 #Import necessary libraries
 library(data.table)
-library(dpylr)
+library(dplyr)
 
 #Read in snp info file 
 ALL_snpinfo<-fread("/home/ashley/LCL_chemotherapy/ALL/ALL_snp.info")
