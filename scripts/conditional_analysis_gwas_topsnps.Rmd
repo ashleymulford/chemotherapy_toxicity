@@ -1,0 +1,105 @@
+---
+title: "Conditional Analysis of Genome-wide Significant SNPs Identified with GWAS"
+author: "Ashley Mulford"
+date: "January 7, 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(data.table)
+
+```
+
+## YRI Daunorucicin: 2 SNPs on chr 4 (rs61079639, rs60507300)
+### Top SNP: rs61079639
+
+```{r}
+#create one matrix with snps and pheno
+
+yri_dauno_snps<-fread("/Users/ashle/OneDrive/Wheeler_Lab/LCL_gwas_twas/conditional_analysis_snps_YRI_dauno.txt")
+yri_dauno_pheno<-fread("/Users/ashle/OneDrive/Wheeler_Lab/LCL_gwas_twas/YRI_dauno_bestpheno_noids.txt")
+
+colnames(yri_dauno_pheno)<-"pheno"
+
+yri_dauno_snps_only<-transpose(yri_dauno_snps[, c(-1:-3)])
+colnames(yri_dauno_snps_only)<-c("rs60507300", "rs61079639")
+
+yri_dauno<-cbind(yri_dauno_snps_only,yri_dauno_pheno)
+
+
+#linear regression 
+summary(lm(yri_dauno$pheno~yri_dauno$rs61079639))
+summary(lm(yri_dauno$pheno~yri_dauno$rs60507300))
+summary(lm(yri_dauno$pheno~yri_dauno$rs60507300 + yri_dauno$rs61079639))
+
+
+
+```
+
+
+## ASN Carboplatin: 3 SNPs on chr 9 (rs2100011, rs2254812, rs2254813)
+###Top SNP: rs2100011
+
+```{r}
+#create one matrix with snps and pheno
+
+asn_carbo_snps<-fread("/Users/ashle/OneDrive/Wheeler_Lab/LCL_gwas_twas/conditional_analysis_snps_ASN_carbo.txt")
+asn_carbo_pheno<-fread("/Users/ashle/OneDrive/Wheeler_Lab/LCL_gwas_twas/ASN_carbo_bestpheno_noids.txt")
+
+colnames(asn_carbo_pheno)<-"pheno"
+
+asn_carbo_snps_only<-transpose(asn_carbo_snps[, c(-1:-3)])
+colnames(asn_carbo_snps_only)<-c("rs2254813", "rs2254812", "rs2100011")
+
+asn_carbo<-cbind(asn_carbo_snps_only,asn_carbo_pheno)
+
+
+#linear regression 
+summary(lm(asn_carbo$pheno~asn_carbo$rs2100011))
+summary(lm(asn_carbo$pheno~asn_carbo$rs2254812))
+summary(lm(asn_carbo$pheno~asn_carbo$rs2254813))
+summary(lm(asn_carbo$pheno~asn_carbo$rs2254812 + asn_carbo$rs2100011))
+summary(lm(asn_carbo$pheno~asn_carbo$rs2254813 + asn_carbo$rs2100011))
+
+```
+
+
+## YRI Etoposide: 6 SNPs on chr 12 (rs7971310, rs7960974, rs7979399, rs2711729, rs2711728, rs11183699)
+### Top SNP: rs7971310
+
+```{r}
+#create one matrix with snps and pheno
+
+yri_etop_snps<-fread("/Users/ashle/OneDrive/Wheeler_Lab/LCL_gwas_twas/conditional_analysis_snps_YRI_etop.txt")
+yri_etop_pheno<-fread("/Users/ashle/OneDrive/Wheeler_Lab/LCL_gwas_twas/YRI_etop_bestpheno_noids.txt")
+
+colnames(yri_etop_pheno)<-"pheno"
+
+yri_etop_snps_only<-transpose(yri_etop_snps[, c(-1:-3)])
+colnames(yri_etop_snps_only)<-c("rs2711729", "rs2711728", "rs7979399", "rs7960974", "rs11183699", "rs7971310")
+
+yri_etop<-cbind(yri_etop_snps_only,yri_etop_pheno)
+
+
+#linear regression 
+summary(lm(yri_etop$pheno~yri_etop$rs7971310))
+summary(lm(yri_etop$pheno~yri_etop$rs7960974))
+summary(lm(yri_etop$pheno~yri_etop$rs7960974 + yri_etop$rs7971310))
+summary(lm(yri_etop$pheno~yri_etop$rs7979399))
+summary(lm(yri_etop$pheno~yri_etop$rs7979399 + yri_etop$rs7971310))
+summary(lm(yri_etop$pheno~yri_etop$rs2711729))
+summary(lm(yri_etop$pheno~yri_etop$rs2711729 + yri_etop$rs7971310))
+summary(lm(yri_etop$pheno~yri_etop$rs2711728))
+summary(lm(yri_etop$pheno~yri_etop$rs2711728 + yri_etop$rs7971310))
+summary(lm(yri_etop$pheno~yri_etop$rs11183699))
+summary(lm(yri_etop$pheno~yri_etop$rs11183699 + yri_etop$rs7971310))
+
+```
+
+
+
+
+
+
