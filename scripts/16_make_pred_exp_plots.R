@@ -81,3 +81,46 @@ ggplot(xy_YRI_Mult_cape_EsoMuc, aes(x = xy_YRI_Mult_cape_EsoMuc$ENSG00000060339.
   ggtitle("YRI Capecitabine Esophagus Mucosa CCAR1")
 dev.off()
 
+
+#All plots in one pdf:
+
+pdf("/home/ashley/LCL_chemotherapy/pred_exp_plots.pdf", onefile=TRUE)
+plot1<-(ggplot(xy_ALL_Pred_etop_Brain_Cortex, aes(x = xy_ALL_Pred_etop_Brain_Cortex$ENSG00000172345.9, y = xy_ALL_Pred_etop_Brain_Cortex$Pheno)) +
+  geom_jitter(size = 0.5, color = "black") +
+  geom_density_2d(color = "dark gray") +
+  stat_smooth(method="lm", se = TRUE, fullrange = TRUE, color = "black") +
+  scale_x_continuous(name = "Predicted gene expression") +
+  scale_y_continuous(name = "Etop IC50 (rank normalized)") +
+  theme_bw() +
+  theme(text = element_text(size = 6), plot.title = element_text(hjust = 0.5)) +
+  ggtitle("ALL Etoposide Brain Cortex STARD5"))
+print(plot1)
+plot2<-(ggplot(xy_ALL_Pred_cape_Liver, aes(x = xy_ALL_Pred_cape_Liver$ENSG00000158773.10, y = xy_ALL_Pred_cape_Liver$Pheno)) +
+  geom_jitter(size = 0.5, color = "black") +
+  geom_density_2d(color = "dark gray") +
+  stat_smooth(method="lm", se = TRUE, fullrange = TRUE, color = "black") +
+  scale_x_continuous(name = "Predicted gene expression") +
+  scale_y_continuous(name = "Cape AUC (rank normalized)") +
+  theme_bw() +
+  theme(text = element_text(size = 6), plot.title = element_text(hjust = 0.5)) +
+  ggtitle("ALL Capecitabine Liver USF1"))
+print(plot2)
+plot3<-(ggplot(xy_YRI_Mult_cape_EsoMuc, aes(x = xy_YRI_Mult_cape_EsoMuc$ENSG00000060339.9, y = xy_YRI_Mult_cape_EsoMuc$Pheno)) +
+  geom_jitter(size = 0.5, color = "black") +
+  geom_density_2d(color = "dark gray") +
+  stat_smooth(method="lm", se = TRUE, fullrange = TRUE, color = "black") +
+  scale_x_continuous(name = "Predicted gene expression") +
+  scale_y_continuous(name = "Cape AUC (rank normalized)") +
+  theme_bw() +
+  theme(text = element_text(size = 6), plot.title = element_text(hjust = 0.5)) +
+  ggtitle("YRI Capecitabine Esophagus Mucosa CCAR1"))
+print(plot3)
+dev.off()
+
+
+pdf("/home/ashley/LCL_chemotherapy/pred_exp_plots2.pdf", onefile=TRUE, paper="A4r")
+ggarrange(plot1, plot2, plot3,
+          labels = c("A", "B", "C"),
+          font.label = list(size = 8),
+          ncol = 3, nrow = 3)
+dev.off()
